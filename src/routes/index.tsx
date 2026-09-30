@@ -1,24 +1,20 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from '@tanstack/react-router';
+import { ArrowRight, ArrowUpRight, CalendarDays, Check, HeartHandshake, ShieldCheck, Sparkles } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { ArrowButton, Checklist, FinalCTA, images, ReviewCard, reviews, SectionHead, ServiceCard, services, TextLink, areas } from '@/components/site/site';
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
-  component: Index,
+export const Route = createFileRoute('/')({
+  head: () => ({ meta: [{ title: 'BrightNest Cleaning Co. | Professional Home & Commercial Cleaning' }, { name: 'description', content: 'Professional residential and commercial cleaning services with flexible scheduling, reliable service, and a satisfaction guarantee. Request your free quote today.' }, { property: 'og:title', content: 'BrightNest Cleaning Co. | Professional Home & Commercial Cleaning' }, { property: 'og:description', content: 'Reliable home and commercial cleaning with flexible scheduling. Request a free quote from BrightNest.' }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }] }),
+  component: Home,
 });
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
+function Home() { return <main>
+  <section className="hero"><img src={images.hero} alt="Professional cleaner carefully cleaning a bright, welcoming living room" className="hero-image" width={1600} height={1000} fetchPriority="high" /><div className="hero-overlay" /><div className="container hero-content"><p className="hero-kicker"><span className="kicker-line" /> A BETTER EVERYDAY STARTS HERE</p><h1>Professional Cleaning.<br /><em>Done Right.</em></h1><p className="hero-copy">Reliable residential and commercial cleaning services designed around your home, your schedule, and your standards.</p><div className="hero-actions"><Button asChild size="lg"><Link to="/quote">Get a Free Quote <ArrowUpRight /></Link></Button><Button asChild size="lg" variant="outline"><Link to="/services">View Our Services <ArrowRight /></Link></Button></div><p className="hero-trust"><span className="trust-dot" /> Trusted local cleaning professionals</p></div></section>
+  <section className="trust-strip" aria-label="Why customers choose BrightNest"><div className="container trust-items"><div><ShieldCheck /><span>Fully Insured</span></div><div><CalendarDays /><span>Flexible Scheduling</span></div><div><HeartHandshake /><span>Reliable & Professional</span></div><div><Sparkles /><span>Satisfaction Guaranteed</span></div></div></section>
+  <section className="section services-section"><div className="container"><SectionHead eyebrow="WHAT WE DO" title="Cleaning Services That Fit Your Life" description="From weekly upkeep to a full refresh, choose the care that makes sense for your space and your schedule." action={<TextLink to="/services">Explore All Services</TextLink>} /><div className="services-grid">{services.map(service => <ServiceCard key={service.slug} service={service} />)}</div></div></section>
+  <section className="split-section"><div className="split-image"><img src={images.cleaner} alt="BrightNest professional carefully cleaning a bathroom sink" loading="lazy" width={1200} height={900} /></div><div className="split-content"><div className="split-content-inner"><p className="eyebrow">THE BRIGHTNEST DIFFERENCE</p><h2>A Cleaner Space.<br /><em>Less To Worry About.</em></h2><p>We believe a clean space should make life feel easier—not add another task to your list. That’s why we bring care, consistency, and attention to detail to every visit.</p><Checklist items={['Reliable scheduling', 'Detailed cleaning standards', 'Friendly professionals', 'Easy booking', 'Consistent service', 'Satisfaction guarantee']} /><TextLink to="/about">More About BrightNest</TextLink></div></div></section>
+  <section className="section process-section"><div className="container"><SectionHead eyebrow="SIMPLE FROM THE START" title="How It Works" description="Getting a cleaner space shouldn’t be complicated." /><div className="process-grid"><div><span>01</span><h3>Request a Quote</h3><p>Tell us about your space and what you need.</p></div><div><span>02</span><h3>Choose Your Service</h3><p>Pick the cleaning service and schedule that works for you.</p></div><div><span>03</span><h3>Enjoy a Cleaner Space</h3><p>Our team handles the cleaning while you get on with your day.</p></div></div><ArrowButton to="/quote">Get a Free Quote</ArrowButton></div></section>
+  <section className="section reviews-section"><div className="container"><SectionHead eyebrow="KIND WORDS" title="What Our Customers Say" action={<TextLink to="/reviews">Read More Reviews</TextLink>} /><div className="reviews-grid">{reviews.slice(0, 3).map(review => <ReviewCard key={review.name} review={review} />)}</div></div></section>
+  <section className="section areas-section"><div className="container areas-layout"><div><p className="eyebrow">CLOSE TO HOME</p><h2>Proudly Serving Local Homes & Businesses</h2><p>Good cleaning starts with showing up for our neighbors. We’re proud to serve homes and small businesses throughout our local community.</p><TextLink to="/service-areas">See All Service Areas</TextLink></div><div className="areas-list">{areas.map((area, i) => <div key={area.name}><span>0{i + 1}</span><strong>{area.name}</strong><ArrowUpRight size={18} /></div>)}</div></div></section>
+  <section className="guarantee-section"><div className="container guarantee-inner"><div className="guarantee-icon"><ShieldCheck size={34} strokeWidth={1.3} /></div><div><p className="eyebrow">OUR PROMISE TO YOU</p><h2>Your Satisfaction Matters</h2><p>We stand behind our work. If something isn’t quite right, let us know—we want you to feel confident every time you welcome us into your space.</p><div className="guarantee-label"><Check size={17} /> Satisfaction Guaranteed</div></div><Button asChild size="lg" variant="outline"><Link to="/quote">Get Your Free Quote <ArrowUpRight /></Link></Button></div></section>
+  <FinalCTA />
+</main>; }
