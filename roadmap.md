@@ -1,3 +1,3 @@
 - [x] Build homepage and shared responsive navigation/footer
-- [ ] Build Services, About, Service Areas, Reviews, Contact, Quote, and Booking pages
-- [ ] Verify quote and booking forms, links, and desktop/mobile presentation
+- [x] Build Services, About, Service Areas, Reviews, Contact, Quote, and Booking pages
+- [x] Verify quote, booking, and contact forms, links, and desktop/mobile presentation
