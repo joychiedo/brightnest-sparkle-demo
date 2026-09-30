@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep BrightNest page content in file-based routes and shared marketing content/components in `src/components/site/`, so repeated services and reviews stay consistent and easy to update.
+- Keep quote, booking, and contact submissions client-side as explicit demo interactions; no real business or persistence is connected.
